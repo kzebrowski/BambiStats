@@ -3,7 +3,20 @@ import { Table } from 'reactstrap';
 
 export {BodyMeasurementTable}
 
-function BodyMeasurementTable(props: any)
+export interface BodyMeasurementRecord
+{
+    valueDate: Date,
+    weight: number,
+    numberOfPoops: number,
+    sleepLength: number | undefined
+}
+
+export interface BodyMeasurementProps
+{
+    data: BodyMeasurementRecord[]
+}
+
+function BodyMeasurementTable(props: BodyMeasurementProps)
 {
     return (
     <>
@@ -18,30 +31,13 @@ function BodyMeasurementTable(props: any)
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th>test</th>
-                    <th>test</th>
-                    <th>test</th>
-                    <th>test</th>
-                </tr>
-                <tr>
-                    <th>test</th>
-                    <th>test</th>
-                    <th>test</th>
-                    <th>test</th>
-                </tr>
-                <tr>
-                    <th>test</th>
-                    <th>test</th>
-                    <th>test</th>
-                    <th>test</th>
-                </tr>
-                <tr>
-                    <th>test</th>
-                    <th>test</th>
-                    <th>test</th>
-                    <th>test</th>
-                </tr>
+                {props.data.map(x =>
+                    <tr>
+                        <th>{x.valueDate.toDateString()}</th>
+                        <th>{x.weight}</th>
+                        <th>{x.numberOfPoops}</th>
+                        <th>{x.sleepLength == undefined ? '---' : x.sleepLength}</th>
+                    </tr>)}
             </tbody>
         </Table>
     </>);
