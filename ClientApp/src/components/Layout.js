@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 import { NavMenu } from './NavMenu';
-import {BodyMeasurementTable} from '../BodyMeasurementTable'
-import '../styles/main.css'
+import {BirthdayNotification} from '../BirthdayNotification';
+import { BodyMeasurementSection } from '../TypeScript/BodyMeasurementSection';
+import '../styles/main.css';
 
 export class Layout extends Component {
   static displayName = Layout.name;
-
-  dummyData = [
-    {
-      valueDate: new Date(),
-      weight: 2.8,
-      numberOfPoops: 4
-    }
-  ];
 
   render () {
     return (
@@ -21,7 +14,8 @@ export class Layout extends Component {
         <NavMenu />
         <Container className="pb-3">
           {this.props.children}
-          <BodyMeasurementTable data={this.dummyData} />
+          <BirthdayNotification/>
+          <BodyMeasurementSection/>
         </Container>
       </div>
     );

@@ -1,26 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Table } from 'reactstrap';
-
-export {BodyMeasurementTable}
 
 export interface BodyMeasurementRecord
 {
     valueDate: Date,
     weight: number,
     numberOfPoops: number,
-    sleepLength: number | undefined
+    sleepLength?: number
 }
 
-export interface BodyMeasurementProps
+interface BodyMeasurementProps
 {
     data: BodyMeasurementRecord[]
 }
 
-function BodyMeasurementTable(props: BodyMeasurementProps)
+export const BodyMeasurementTable : React.FC<BodyMeasurementProps> = (props: BodyMeasurementProps) =>
 {
     return (
     <>
-        <div className='text-center text-5xl font-semibold pt-4 pb-8 mb-4 mx-auto'>Dziś Bambi kończy 11 tygodni! &#127881;</div>
         <Table striped>
             <thead>
                 <tr>
@@ -33,10 +30,10 @@ function BodyMeasurementTable(props: BodyMeasurementProps)
             <tbody>
                 {props.data.map(x =>
                     <tr>
-                        <th>{x.valueDate.toDateString()}</th>
+                        <th>{x.valueDate.toLocaleDateString('pl-PL')}</th>
                         <th>{x.weight}</th>
                         <th>{x.numberOfPoops}</th>
-                        <th>{x.sleepLength == undefined ? '---' : x.sleepLength}</th>
+                        <th>{x.sleepLength === undefined ? '---' : x.sleepLength}</th>
                     </tr>)}
             </tbody>
         </Table>
