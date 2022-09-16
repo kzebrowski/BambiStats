@@ -1,5 +1,7 @@
 import React from 'react';
 import { Table } from 'reactstrap';
+import { ActionIcon } from './ActionIcon'
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 
 export interface BodyMeasurementRecord
 {
@@ -29,11 +31,12 @@ export const BodyMeasurementTable : React.FC<BodyMeasurementProps> = (props: Bod
             </thead>
             <tbody>
                 {props.data.map(x =>
-                    <tr>
+                    <tr key={x.valueDate.toDateString() + x.weight}>
                         <th>{x.valueDate.toLocaleDateString('pl-PL')}</th>
                         <th>{x.weight}</th>
                         <th>{x.numberOfPoops}</th>
                         <th>{x.sleepLength === undefined ? '---' : x.sleepLength}</th>
+                        <th><ActionIcon data={{}} icon={faTrashCan} handleClick={() => {}}/></th>
                     </tr>)}
             </tbody>
         </Table>

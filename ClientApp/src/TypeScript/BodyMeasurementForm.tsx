@@ -47,42 +47,55 @@ export const BodyMeasurementForm : React.FC<Props> = (props: Props) =>
     }
 
     return (
-        <form className="py-2 px-4 border-2 border-solid rounded flex" onSubmit={onFormSubmit}>
-                <div className="flex margin-auto m-auto">
-                    <label htmlFor="measurementDate" className="pr-2 font-semibold">Data:</label>
-                    <input 
-                        type="date"
-                        id="measurementDate"
-                        className="border-2 rounded pl-2 w-36"
-                        defaultValue={valueDate.toISOString().substring(0,10)}
-                        onBlur={handleValueDateChange}/>
-                    <label htmlFor="weight" className="ml-4 pr-2 font-semibold">Waga(kg):</label>
-                    <input 
-                        type="number"
-                        id="weight"
-                        className="border-2 rounded pl-2 w-36"
-                        onFocus={(e) => e.target.select()}
-                        onBlur={handleWeightChange}
-                        min="0"
-                        step="0.05"/>
-                    <label htmlFor="numberOfPoops" className="ml-4 pr-2 font-semibold">Ilość kup:</label>
-                    <input
-                        type="number"
-                        id="numberOfPoops"
-                        className="border-2 rounded pl-2 w-36"
-                        onFocus={(e) => e.target.select()}
-                        onBlur={handleNumberOfPoopsChange}
-                        min="0"/>
-                    <label htmlFor="sleepTime" className="ml-4 pr-2 font-semibold">Czas snu (godz.):</label>
+        <form className="py-2 px-4 my-3 border-2 border-solid rounded flex" onSubmit={onFormSubmit}>
+                <div className="flex flex-col lg:flex-row m-auto space-y-1  lg:space-y-0 lg:space-x-5">
+                    <div>
+                        <label htmlFor="measurementDate" className="hidden lg:inline-block lg:pr-2 font-semibold">Data:</label>
+                        <input 
+                            type="date"
+                            id="measurementDate"
+                            className="border-2 rounded pl-2 w-48 lg:w-36"
+                            placeholder="Data"
+                            defaultValue={valueDate.toISOString().substring(0,10)}
+                            onBlur={handleValueDateChange}/>
+                    </div>
+                    <div>
+                        <label htmlFor="weight" className="hidden lg:inline-block pr-2 font-semibold">Waga(kg):</label>
+                        <input 
+                            type="number"
+                            id="weight"
+                            className="border-2 rounded pl-2 lg:w-36"
+                            placeholder="Waga(kg)"
+                            onFocus={(e) => e.target.select()}
+                            onBlur={handleWeightChange}
+                            min="0"
+                            step="0.05"/>
+                    </div>
+                    <div>
+                        <label htmlFor="numberOfPoops" className="hidden lg:inline-block pr-2 font-semibold">Ilość kup:</label>
+                        <input
+                            type="number"
+                            id="numberOfPoops"
+                            className="border-2 rounded pl-2 lg:w-36"
+                            placeholder="Ilość kup"
+                            onFocus={(e) => e.target.select()}
+                            onBlur={handleNumberOfPoopsChange}
+                            min="0"/>
+                    </div>
+                    <div>
+                    <label htmlFor="sleepTime" className="hidden lg:inline-block pr-2 font-semibold">Czas snu (godz.):</label>
                     <input
                         type="number"
                         id="sleepTime"
-                        className="border-2 rounded pl-2 w-36"
+                        className="border-2 rounded pl-2 lg:w-36"
+                        placeholder="Czas snu (godz.)"
                         onFocus={(e) => e.target.select()}
                         onBlur={handlesleepLengthChange}
                         step="0.5"
                         min="0"/>
-                    <div className="flex ml-4 pr-2 w-32 font-semibold border-2 border-solid rounded backgroud hover:pointer" style={{backgroundColor: "#FCC5C0"}}>
+                    </div>
+                    <div className="flex pr-2 lg:w-32 font-semibold border-2 border-solid rounded backgroud hover:pointer"
+                        style={{backgroundColor: "#FCC5C0"}}>
                         <input type="submit" className="m-auto text-white w-full h-full" value="Dodaj" />
                     </div>
                 </div>

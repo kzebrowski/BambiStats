@@ -4,6 +4,7 @@ import { NavMenu } from './NavMenu';
 import {BirthdayNotification} from '../BirthdayNotification';
 import { BodyMeasurementSection } from '../TypeScript/BodyMeasurementSection';
 import '../styles/main.css';
+import '../custom.css'
 
 export class Layout extends Component {
   static displayName = Layout.name;
