@@ -1,10 +1,13 @@
 import React from "react";
 import { BodyMeasurementRecord } from "./BodyMeasurementTable";
 import { Line } from 'react-chartjs-2';
+import 'chartjs-adapter-moment';
 import {
   Chart as ChartJS,
   CategoryScale,
+  ChartOptions,
   LinearScale,
+  TimeScale,
   PointElement,
   LineElement,
   Title,
@@ -15,6 +18,7 @@ import {
 ChartJS.register(
   CategoryScale,
   LinearScale,
+  TimeScale,
   PointElement,
   LineElement,
   Title,
@@ -29,20 +33,35 @@ interface Props
 
 export const WeightLineChart : React.FC<Props> = (props : Props) =>
 {
-    let labels = props.data.map(x => x.valueDate.toLocaleDateString());
+    let formatDate = (date : Date) =>  date.toISOString().split('T')[0];
+    let dataset = props.data.map(data => ({x: formatDate(data.valueDate), y: data.weight}));
+
     let data = {
-        labels,
+        axis: 'x',
         datasets: [
           {
             label: 'Waga (kg)',
-            data: props.data.map(x => x.weight),
+            tension: 0.4,
+            data: dataset,
             borderColor: 'rgb(255, 99, 132)',
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
           }
         ],
       };
-    let options = {
+    
+      const options : ChartOptions<'line'> = {
       responsive: true,
+      scales: {
+        x: {
+          grid: {
+            display: false
+          },
+          type: 'time',
+          time: {
+            unit: 'day'
+          }
+        }
+      },
       plugins: {
         legend: {
           position: 'top' as const,

@@ -1,0 +1,78 @@
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 20px;
+}
+
+.close-button:hover {
+    cursor: pointer;
+}
+
+.login-modal {
+    height: 530px;
+    width: 530px;
+}
+
+.reservation-modal {
+    display: flex;
+    width: 630px;
+    min-height: 315px;
+}
+
+.confirmation-modal {
+    padding: 15px;
+}
+
+.okay-button {
+    width: 100%;
+    max-width: 50px;
+    float: right;
+}
+
+.status-change-modal {
+    width: 500px;
+}
+
+.generic-submit-button-dark {
+    width: 100%;
+    margin-top: 8px;
+    background: #FCC5C0;
+    border: none;
+    border-radius: 2px;
+    color: #ffffff;
+}
+
+.generic-submit-button-light {
+    width: 100%;
+    margin-top: 8px;
+    background: #ffffff;
+    border: 1px solid #c7c7c7;
+    border-radius: 2px;
+}
+
+.centered-modal {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    top: 50%;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+}
+
+@media screen and (max-width: 640px) {
+    .login-modal {
+        height: 60%;
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 840px) {
+    .reservation-modal {
+        height: 60%;
+        width: 90%;
+    }
+}

@@ -10,7 +10,6 @@ export interface Props
 
 export const ActionIcon : React.FC<Props> = (props : Props) =>
 {
-
   function handleClick()
   {
       props.handleClick(props.data);
