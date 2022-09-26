@@ -14,7 +14,8 @@ export interface BodyMeasurementRecord
 
 interface BodyMeasurementProps
 {
-    data: BodyMeasurementRecord[]
+    data: BodyMeasurementRecord[],
+    handleEditClick: (editedItem: BodyMeasurementRecord) => void
 }
 
 interface ConfirmationModalData
@@ -27,15 +28,21 @@ export const BodyMeasurementTable : React.FC<BodyMeasurementProps> = (props: Bod
 {
     let [confirmationModalData, setConfirmationModalData] = useState<ConfirmationModalData>({isOpen: false});
 
-    function handleEntryDeletionClick(data: Date)
+    function handleEntryDeletionClick(rowDate: Date)
     {
-        setConfirmationModalData({isOpen: true, valueDate: data });
+        setConfirmationModalData({isOpen: true, valueDate: rowDate });
     }
 
     function deleteEntry(valueDate: Date | undefined)
     {
         if (valueDate === undefined)
             return;
+    }
+
+    function handleEntryEditClick(rowDate: Date)
+    {
+        let editedItem = props.data.filter(x => x.valueDate === rowDate)[0];
+        props.handleEditClick(editedItem);
     }
 
     return (
@@ -46,7 +53,7 @@ export const BodyMeasurementTable : React.FC<BodyMeasurementProps> = (props: Bod
                     <th>Data wpisu</th>
                     <th>Waga</th>
                     <th>Ilość kup</th>
-                    <th>Długość snu</th>
+                    <th>Czas snu (godz.)</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,8 +63,8 @@ export const BodyMeasurementTable : React.FC<BodyMeasurementProps> = (props: Bod
                         <th>{x.weight}</th>
                         <th>{x.numberOfPoops}</th>
                         <th>{x.sleepLength === undefined ? '---' : x.sleepLength}</th>
-                        <th><ActionIcon data={x.valueDate} icon={faPenToSquare} handleClick={() => {}}/></th>
-                        <th><ActionIcon data={x.valueDate} icon={faTrashCan} handleClick={handleEntryDeletionClick}/></th>
+                        <th className='px-3 md:px-2'><ActionIcon data={x.valueDate} icon={faPenToSquare} handleClick={handleEntryEditClick}/></th>
+                        <th className='px-3 md:px-2'><ActionIcon data={x.valueDate} icon={faTrashCan} handleClick={handleEntryDeletionClick}/></th>
                     </tr>)}
             </tbody>
         </Table>
