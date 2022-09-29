@@ -13,7 +13,7 @@ const string dbKey = "7uZA2bdKKUMw7OnQJcrfLnYHmI8NaOtQT33LNkZYqtqSNFXZAvQcBV2ZGr
 const string dbUri = "https://bambi-stats-db.documents.azure.com:443/";
 const string dbName = "BambiStats"; 
 
-builder.Services.AddDbContext<BambiStatsContext>(options => options.UseCosmos(dbUri, dbKey, dbName));
+builder.Services.AddDbContext<BambiStatsContext>(options => options.UseCosmos(dbUri, dbKey, dbName).LogTo(Console.WriteLine).EnableSensitiveDataLogging());
 builder.Services.AddScoped<IBodyMeasurementRepository, BodyMeasurementRepository>();
 
 var app = builder.Build();

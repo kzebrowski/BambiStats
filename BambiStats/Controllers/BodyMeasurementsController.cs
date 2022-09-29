@@ -29,8 +29,6 @@ namespace BambiStats.Controllers
     [HttpPost("[action]")]
     public IActionResult Add(BodyMeasurementViewModel viewModel)
     {
-      viewModel.ValueDate = viewModel.ValueDate.Date;
-
       var existingRecord = _bodyMeasurementRepository.GetByValueDate(viewModel.ValueDate);
 
       if (existingRecord != null)

@@ -5,8 +5,14 @@ namespace BambiStats.ViewModels
 {
   public class BodyMeasurementViewModel
   {
+    DateTime _valueDate;
+
     [Range(typeof(DateTime), "2022-06-01", "2100-1-1")]
-    public DateTime ValueDate { get; set; }
+    public DateTime ValueDate
+    {
+      get => _valueDate.Date;
+      set => _valueDate = value;
+    }
 
     [Required]
     [Range(1d, Double.MaxValue)]
