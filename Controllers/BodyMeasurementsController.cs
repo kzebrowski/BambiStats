@@ -1,0 +1,70 @@
+﻿using System.Globalization;
+using BambiStats.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Repository.DataAccess.BodyMeasurementRepository;
+using Repository.Models;
+
+namespace BambiStats.Controllers
+{
+  [ApiController]
+  [Route("/api/[controller]")]
+  public class BodyMeasurementsController : ControllerBase
+  {
+    IBodyMeasurementRepository _bodyMeasurementRepository;
+
+    public BodyMeasurementsController(IBodyMeasurementRepository bodyMeasurementRepository)
+    {
+      _bodyMeasurementRepository = bodyMeasurementRepository;
+    }
+
+    [HttpGet]
+    public IActionResult GetAll()
+    {
+     var measurements = _bodyMeasurementRepository.GetAll();
+
+      return Ok(measurements);
+    }
+
+    [HttpPost("[action]")]
+    public IActionResult Add(BodyMeasurementViewModel viewModel)
+    {
+      viewModel.ValueDate = viewModel.ValueDate.Date;
+
+      var existingRecord = _bodyMeasurementRepository.GetByValueDate(viewModel.ValueDate);
+
+      if (existingRecord != null)
+        return BadRequest("A record already exists for given date.");
+
+      var recordToAdd = viewModel.GetNewBodyMeasurementModel();
+      var createdRecord = _bodyMeasurementRepository.AddRecord(recordToAdd);
+
+      return Created(String.Empty, createdRecord);
+    }
+
+    [HttpPost("[action]")]
+    public IActionResult Update(BodyMeasurementViewModel viewModel)
+    {
+      if (!ModelState.IsValid)
+        return BadRequest();
+
+      var recordToUpdate = _bodyMeasurementRepository.GetByValueDate(viewModel.ValueDate);
+
+      var updatedRecord = _bodyMeasurementRepository.Update(recordToUpdate);
+
+      return Ok(updatedRecord);
+    }
+
+    [HttpDelete("[action]")]
+    public IActionResult Delete([FromQuery]DateTime valueDate)
+    {
+      var existingRecord = _bodyMeasurementRepository.GetByValueDate(valueDate);
+
+      if(existingRecord == null)
+        return BadRequest("The item does not exist");
+
+      _bodyMeasurementRepository.Delete(valueDate);
+      return Ok();
+    }
+  }
+}

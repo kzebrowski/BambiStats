@@ -11,7 +11,7 @@
     "BambiStats": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7216;http://localhost:5216",
+      "applicationUrl": "https://localhost:7216;http://localhost:5216;",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"

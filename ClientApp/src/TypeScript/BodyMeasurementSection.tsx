@@ -1,40 +1,78 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { BodyMeasurementTable, BodyMeasurementRecord } from './BodyMeasurementTable';
 import { BodyMeasurementForm } from './BodyMeasurementForm';
 import { WeightLineChart } from "./WieightLineChart";
+import date from 'date-and-time';
+
+interface FetchedBodyMeasurementRecord
+{
+    valueDate: string,
+    weight: number,
+    numberOfPoops: number,
+    sleepLength?: number
+}
 
 export const BodyMeasurementSection: React.FC = () =>
 {
-    let dummyData: BodyMeasurementRecord[] =
-        [
-            {
-                valueDate: new Date(2022, 8, 8),
-                weight: 2.8,
-                numberOfPoops: 4
-            },
-            {
-                valueDate: new Date(2022, 8, 9),
-                weight: 4.2,
-                numberOfPoops: 12,
-                sleepLength: 4
-            },
-            {
-                valueDate: new Date(2022, 8, 10),
-                weight: 5,
-                numberOfPoops: 12,
-                sleepLength: 4
-            }
-        ];
-
-    let [formData, setFormData] = useState<BodyMeasurementRecord[]>(dummyData);
+    let [formData, setFormData] = useState<BodyMeasurementRecord[]>([]);
     let [isUnderEdition, setIsUnderEdition] = useState(false);
     let [itemUnderEdition, setitemUnderEdition] =
         useState<BodyMeasurementRecord>({valueDate: new Date(), weight: 0, numberOfPoops: 0 });
 
-    function handleEditClick (editedItem: BodyMeasurementRecord) {
+    useEffect(() => {
+        fetch("/api/BodyMeasurements")
+            .then(response => response.json())
+            .then(data => setFormData(
+                data.map((x : FetchedBodyMeasurementRecord) => {
+                    return {
+                        valueDate: new Date(x.valueDate),
+                        weight: x.weight,
+                        numberOfPoops: x.numberOfPoops,
+                        sleepLength: x.sleepLength}
+                    })))
+            .catch(error => console.error(error));
+    }, []);
+    
+    function handleEditClick (editedItem: BodyMeasurementRecord)
+    {
         setitemUnderEdition(editedItem);
         setIsUnderEdition(true);
     }
+
+    function AddRecord(newItem : BodyMeasurementRecord)
+    {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newItem)
+        };
+        fetch('/api/BodyMeasurements/add', requestOptions)
+            .then(response => {
+                    if(!response.ok)
+                        alert("Wpis na tę datę już istnieje");
+                    
+                    return response;
+                })
+            .then(response => response.json())
+            .then((data :  FetchedBodyMeasurementRecord) => {
+                let createdRecord : BodyMeasurementRecord = {
+                    valueDate: new Date(data.valueDate),
+                    weight: data.weight,
+                    numberOfPoops: data.numberOfPoops,
+                    sleepLength: data.sleepLength
+                }
+
+                setFormData([createdRecord, ...formData]);
+            });
+    }
+
+    function DeleteRecord(valueDate : Date)
+    {
+        let formatedValueDate = date.format(valueDate, "YYYY-MM-DD");
+        fetch(`/api/BodyMeasurements/delete?valuedate=${formatedValueDate}`, {method: "DELETE"})
+            .then(data => setFormData(current => current.filter(x => x.valueDate !== valueDate)));
+    }
+
 
     let sortedFormData: BodyMeasurementRecord[] = [];
     sortedFormData = sortedFormData.concat(formData).sort(function (a, b) {
@@ -49,14 +87,15 @@ export const BodyMeasurementSection: React.FC = () =>
         <React.Fragment>
             <WeightLineChart data={sortedFormData} />
             <BodyMeasurementForm
-                addNewItem={(newItem) => setFormData([newItem, ...formData])}
+                addNewItem={AddRecord}
                 isUnderEdition={isUnderEdition}
                 itemUnderEdition={itemUnderEdition}
                 setIsUnderEdition={setIsUnderEdition}
                 submitItemEdition={(editedItem) => {}} />
             <BodyMeasurementTable 
                 data={formData}
-                handleEditClick={handleEditClick} />
+                handleEditClick={handleEditClick} 
+                handleRecordDeletion={DeleteRecord}/>
         </React.Fragment>
     );
 }
