@@ -1,6 +1,6 @@
 using Repository.DataAccess;
 using Microsoft.EntityFrameworkCore;
-using Repository.DataAccess.BodyMeasurementRepository;
+using Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 

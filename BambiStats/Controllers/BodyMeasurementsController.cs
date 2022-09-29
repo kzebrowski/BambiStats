@@ -1,9 +1,6 @@
-﻿using System.Globalization;
-using BambiStats.ViewModels;
+﻿using BambiStats.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Repository.DataAccess.BodyMeasurementRepository;
-using Repository.Models;
+using Repository.DataAccess;
 
 namespace BambiStats.Controllers
 {
@@ -21,7 +18,7 @@ namespace BambiStats.Controllers
     [HttpGet]
     public IActionResult GetAll()
     {
-     var measurements = _bodyMeasurementRepository.GetAll();
+      var measurements = _bodyMeasurementRepository.GetAll();
 
       return Ok(measurements);
     }
@@ -35,7 +32,7 @@ namespace BambiStats.Controllers
         return BadRequest("A record already exists for given date.");
 
       var recordToAdd = viewModel.GetNewBodyMeasurementModel();
-      var createdRecord = _bodyMeasurementRepository.AddRecord(recordToAdd);
+      var createdRecord = _bodyMeasurementRepository.Add(recordToAdd);
 
       return Created(String.Empty, createdRecord);
     }
