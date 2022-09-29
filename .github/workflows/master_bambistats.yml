@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'BambiStats'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_36A47808F9D5434D95A4971FF6408D2E }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_976A8EFA9FFB4056870F92FBEA85718E }}
           package: .
