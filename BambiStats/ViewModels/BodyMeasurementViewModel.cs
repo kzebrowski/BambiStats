@@ -7,6 +7,16 @@ namespace BambiStats.ViewModels
   {
     DateTime _valueDate;
 
+    public BodyMeasurementViewModel(){}
+
+    public BodyMeasurementViewModel(BodyMeasurementModel model)
+    {
+      ValueDate = model.ValueDate;
+      Weight = model.Weight;
+      NumberOfPoops = model.NumberOfPoops;
+      SleepLength = NumberOfPoops;
+    }
+
     [Range(typeof(DateTime), "2022-06-01", "2100-1-1")]
     public DateTime ValueDate
     {
@@ -22,6 +32,7 @@ namespace BambiStats.ViewModels
     public int NumberOfPoops { get; set; }
 
     public int? SleepLength { get; set; }
+
 
     public BodyMeasurementModel GetNewBodyMeasurementModel()
     {

@@ -19,8 +19,9 @@ namespace BambiStats.Controllers
     public IActionResult GetAll()
     {
       var measurements = _bodyMeasurementRepository.GetAll();
+      var measurementViewModels = measurements.Select(x => new BodyMeasurementViewModel(x));
 
-      return Ok(measurements);
+      return Ok(measurementViewModels);
     }
 
     [HttpPost("[action]")]
@@ -34,7 +35,7 @@ namespace BambiStats.Controllers
       var recordToAdd = viewModel.GetNewBodyMeasurementModel();
       var createdRecord = _bodyMeasurementRepository.Add(recordToAdd);
 
-      return Created(String.Empty, createdRecord);
+      return Created(String.Empty, new BodyMeasurementViewModel(createdRecord));
     }
 
     [HttpPost("[action]")]
@@ -47,7 +48,7 @@ namespace BambiStats.Controllers
 
       var updatedRecord = _bodyMeasurementRepository.Update(recordToUpdate);
 
-      return Ok(updatedRecord);
+      return Ok(new BodyMeasurementViewModel(updatedRecord));
     }
 
     [HttpDelete("[action]")]

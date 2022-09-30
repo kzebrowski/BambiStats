@@ -19,7 +19,10 @@ namespace Repository
 
     public BodyMeasurementModel GetByValueDate(DateTime valueDate)
     {
-      return _dbContext.BodyMeasurements.SingleOrDefault(x => x.ValueDate == valueDate);
+      // Unoptimal implementation to workaround the problem with CosmosDB storing dates
+      // in unusual format (adding 'Z' at the end) what resulted in Entity Framework not
+      // being able to query properly. Should not be a problem with this workload.
+      return GetAll().SingleOrDefault(x => x.ValueDate == valueDate);
     }
 
     public BodyMeasurementModel Add(BodyMeasurementModel newRecord)
