@@ -124,7 +124,7 @@ export const BodyMeasurementForm : React.FC<Props> = (props: Props) =>
                         className="border-2 rounded pl-2 lg:w-36"
                         placeholder="Czas snu (godz.)"
                         onFocus={(e) => e.target.select()}
-                        value={sleepLength || ''}
+                        value={sleepLength === undefined || sleepLength === 0 ? '---' : sleepLength}
                         onChange={handlesleepLengthChange}
                         step="0.5"
                         min="0"/>
