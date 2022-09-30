@@ -65,7 +65,7 @@ export const BodyMeasurementTable : React.FC<BodyMeasurementProps> = (props: Bod
                         <th>{x.valueDate.toLocaleDateString('pl-PL')}</th>
                         <th>{x.weight}</th>
                         <th>{x.numberOfPoops}</th>
-                        <th>{x.sleepLength === undefined ? '---' : x.sleepLength}</th>
+                        <th>{x.sleepLength === undefined || x.sleepLength === 0 ? '---' : x.sleepLength}</th>
                         <th className='px-3 md:px-2'>
                             <ActionIcon data={x.valueDate} icon={faPenToSquare} handleClick={handleRecordEditClick}/>
                         </th>
