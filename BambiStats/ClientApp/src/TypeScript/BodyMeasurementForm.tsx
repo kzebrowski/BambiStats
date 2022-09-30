@@ -11,7 +11,7 @@ interface EditionProps
     isUnderEdition: boolean,
     itemUnderEdition: BodyMeasurementRecord,
     setIsUnderEdition: React.Dispatch<React.SetStateAction<boolean>>,
-    submitItemEdition: (editedItem: BodyMeasurementRecord) => void
+    submitRecordEdition: (editedItem: BodyMeasurementRecord) => void
 }
 
 export const BodyMeasurementForm : React.FC<Props> = (props: Props) =>
@@ -43,23 +43,31 @@ export const BodyMeasurementForm : React.FC<Props> = (props: Props) =>
     function onFormSubmit(event: FormEvent<HTMLFormElement>)
     {
         event.preventDefault();
+        let newRecord = getRecordFromFormState();
+
         if (props.isUnderEdition)
         {
+            props.submitRecordEdition(newRecord);
             props.setIsUnderEdition(false);
-            return;
+        }
+        else
+        {
+            props.addNewItem(newRecord);
         }
 
-        let newItem : BodyMeasurementRecord =
-        {
-            valueDate: valueDate,
-            weight: weight ?? 0,
-            numberOfPoops: numberOfPoops ?? 0,
-            sleepLength: sleepLength === 0 ? undefined : sleepLength 
-        };
-
-        props.addNewItem(newItem);
         event.currentTarget.reset();
         resetFormValues();
+    }
+
+    function getRecordFromFormState() : BodyMeasurementRecord
+    {
+        return (
+            {
+                valueDate: valueDate,
+                weight: weight ?? 0,
+                numberOfPoops: numberOfPoops ?? 0,
+                sleepLength: sleepLength === 0 ? undefined : sleepLength 
+            });
     }
 
     function resetFormValues()

@@ -46,6 +46,10 @@ namespace BambiStats.Controllers
 
       var recordToUpdate = _bodyMeasurementRepository.GetByValueDate(viewModel.ValueDate);
 
+      recordToUpdate.NumberOfPoops = viewModel.NumberOfPoops;
+      recordToUpdate.Weight = viewModel.Weight;
+      recordToUpdate.SleepLength = viewModel.SleepLength;
+
       var updatedRecord = _bodyMeasurementRepository.Update(recordToUpdate);
 
       return Ok(new BodyMeasurementViewModel(updatedRecord));

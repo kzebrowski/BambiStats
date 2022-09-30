@@ -16,10 +16,15 @@ export const BodyMeasurementSection: React.FC = () =>
 {
     let [formData, setFormData] = useState<BodyMeasurementRecord[]>([]);
     let [isUnderEdition, setIsUnderEdition] = useState(false);
-    let [itemUnderEdition, setitemUnderEdition] =
+    let [itemUnderEdition, setItemUnderEdition] =
         useState<BodyMeasurementRecord>({valueDate: new Date(), weight: 0, numberOfPoops: 0 });
 
     useEffect(() => {
+        fetchAndUpdateTable();
+    }, []);
+
+    function fetchAndUpdateTable()
+    {
         fetch("/api/BodyMeasurements")
             .then(response => response.json())
             .then(data => setFormData(
@@ -31,21 +36,18 @@ export const BodyMeasurementSection: React.FC = () =>
                         sleepLength: x.sleepLength}
                     })))
             .catch(error => console.error(error));
-    }, []);
+    }
     
-    function handleEditClick (editedItem: BodyMeasurementRecord)
+    function handleEditClick (editedRecord: BodyMeasurementRecord)
     {
-        setitemUnderEdition(editedItem);
+        setItemUnderEdition(editedRecord);
         setIsUnderEdition(true);
     }
 
-    function AddRecord(newItem : BodyMeasurementRecord)
+    function addRecord(newItem : BodyMeasurementRecord)
     {
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newItem)
-        };
+        const requestOptions = getPostRequestOptions(newItem);
+
         fetch('/api/BodyMeasurements/add', requestOptions)
             .then(response => {
                     if(!response.ok)
@@ -66,13 +68,40 @@ export const BodyMeasurementSection: React.FC = () =>
             });
     }
 
-    function DeleteRecord(valueDate : Date)
+    function deleteRecord(valueDate : Date)
     {
         let formatedValueDate = date.format(valueDate, "YYYY-MM-DD");
         fetch(`/api/BodyMeasurements/delete?valuedate=${formatedValueDate}`, {method: "DELETE"})
             .then(data => setFormData(current => current.filter(x => x.valueDate !== valueDate)));
     }
 
+    function editRecord(newRecord : BodyMeasurementRecord)
+    {
+        const requestOptions = getPostRequestOptions(newRecord);
+        
+        function handleResponse(response : Response)
+        {
+            if(!response.ok)
+            {
+                alert("Wystąpił błąd. Edycja nieudana.");
+                return;
+            }
+
+            fetchAndUpdateTable();
+        }
+
+        fetch('/api/BodyMeasurements/update', requestOptions)
+            .then(handleResponse);
+    }
+
+    function getPostRequestOptions(body : any)
+    {
+        return {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        };
+    }
 
     let sortedFormData: BodyMeasurementRecord[] = [];
     sortedFormData = sortedFormData.concat(formData).sort(function (a, b) {
@@ -87,15 +116,15 @@ export const BodyMeasurementSection: React.FC = () =>
         <React.Fragment>
             <WeightLineChart data={sortedFormData} />
             <BodyMeasurementForm
-                addNewItem={AddRecord}
+                addNewItem={addRecord}
                 isUnderEdition={isUnderEdition}
                 itemUnderEdition={itemUnderEdition}
                 setIsUnderEdition={setIsUnderEdition}
-                submitItemEdition={(editedItem) => {}} />
+                submitRecordEdition={editRecord} />
             <BodyMeasurementTable 
                 data={formData}
                 handleEditClick={handleEditClick} 
-                handleRecordDeletion={DeleteRecord}/>
+                handleRecordDeletion={deleteRecord}/>
         </React.Fragment>
     );
 }
