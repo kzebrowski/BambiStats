@@ -92,6 +92,7 @@ export const BodyMeasurementForm : React.FC<Props> = (props: Props) =>
                     <input 
                         type="date"
                         id="measurementDate"
+                        readOnly={props.isUnderEdition}
                         className="border-2 rounded pl-2 w-full lg:w-36"
                         placeholder="Data"
                         value={valueDate.toISOString().substring(0,10)}
