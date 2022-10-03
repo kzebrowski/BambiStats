@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const Loader: React.FC<Props> = (props: Props) => {
-    let loaderStyle = {
+    let loaderStyle : React.CSSProperties = {
         height: "100px",
         width: "100px",
         position: "absolute",
