@@ -59,6 +59,12 @@ export const BodyMeasurementForm : React.FC<Props> = (props: Props) =>
         resetFormValues();
     }
 
+    function cancelEdition()
+    {
+        resetFormValues();
+        props.setIsUnderEdition(false);
+    }
+
     function getRecordFromFormState() : BodyMeasurementRecord
     {
         return (
@@ -136,7 +142,7 @@ export const BodyMeasurementForm : React.FC<Props> = (props: Props) =>
                 </div>
                 {props.isUnderEdition &&
                     <div className="inline-flex pr-2 lg:w-32 font-semibold border-2 border-solid rounded backgroud hover:pointer">
-                        <button className="m-auto w-full h-full" onClick={() => props.setIsUnderEdition(false)}>Anuluj edycję</button>
+                        <button className="m-auto w-full h-full" onClick={cancelEdition}>Anuluj edycję</button>
                     </div>}
                 </div>
             </form>

@@ -3,6 +3,7 @@ import { BodyMeasurementTable, BodyMeasurementRecord } from './BodyMeasurementTa
 import { BodyMeasurementForm } from './BodyMeasurementForm';
 import { WeightLineChart } from "./WieightLineChart";
 import date from 'date-and-time';
+import { Loader } from "./Loader";
 
 interface FetchedBodyMeasurementRecord
 {
@@ -18,6 +19,7 @@ export const BodyMeasurementSection: React.FC = () =>
     let [isUnderEdition, setIsUnderEdition] = useState(false);
     let [itemUnderEdition, setItemUnderEdition] =
         useState<BodyMeasurementRecord>({valueDate: new Date(), weight: 0, numberOfPoops: 0 });
+    let [loaderIsVisible, setLoaderIsVisible] = useState(false);
 
     useEffect(() => {
         fetchAndUpdateTable();
@@ -25,6 +27,8 @@ export const BodyMeasurementSection: React.FC = () =>
 
     function fetchAndUpdateTable()
     {
+        setLoaderIsVisible(true);
+
         fetch("/api/BodyMeasurements")
             .then(response => response.json())
             .then(data => setFormData(
@@ -35,6 +39,7 @@ export const BodyMeasurementSection: React.FC = () =>
                         numberOfPoops: x.numberOfPoops,
                         sleepLength: x.sleepLength}
                     })))
+            .then(() => setLoaderIsVisible(false))
             .catch(error => console.error(error));
     }
     
@@ -125,6 +130,7 @@ export const BodyMeasurementSection: React.FC = () =>
                 data={formData}
                 handleEditClick={handleEditClick} 
                 handleRecordDeletion={deleteRecord}/>
+            <Loader isShown={loaderIsVisible}/>
         </React.Fragment>
     );
 }
