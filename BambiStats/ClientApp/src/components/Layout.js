@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 import { NavMenu } from './NavMenu';
 import {BirthdayNotification} from '../BirthdayNotification';
-import { BodyMeasurementSection } from '../TypeScript/BodyMeasurementSection';
+import { BodyMeasurementSection } from '../TypeScript/BodyMeasurement/BodyMeasurementSection';
 import '../styles/main.css';
 import '../styles/modal.css';
 import '../custom.css';

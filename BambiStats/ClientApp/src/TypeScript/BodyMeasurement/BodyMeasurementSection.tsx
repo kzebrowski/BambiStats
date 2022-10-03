@@ -3,7 +3,7 @@ import { BodyMeasurementTable, BodyMeasurementRecord } from './BodyMeasurementTa
 import { BodyMeasurementForm } from './BodyMeasurementForm';
 import { WeightLineChart } from "./WieightLineChart";
 import date from 'date-and-time';
-import { Loader } from "./Loader";
+import { Loader } from "../Loader";
 
 interface FetchedBodyMeasurementRecord
 {

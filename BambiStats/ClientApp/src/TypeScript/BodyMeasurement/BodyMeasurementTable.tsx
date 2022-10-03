@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Table } from 'reactstrap';
-import { ActionIcon } from './ActionIcon'
+import { ActionIcon } from '../ActionIcon'
 import { faTrashCan, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
-import { ConfirmationModal } from './ConfirmationModal';
+import { ConfirmationModal } from '../ConfirmationModal';
 
 export interface BodyMeasurementRecord
 {
