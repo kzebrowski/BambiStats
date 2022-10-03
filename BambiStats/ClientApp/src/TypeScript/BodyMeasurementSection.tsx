@@ -51,6 +51,7 @@ export const BodyMeasurementSection: React.FC = () =>
 
     function addRecord(newItem : BodyMeasurementRecord)
     {
+        setLoaderIsVisible(true);
         const requestOptions = getPostRequestOptions(newItem);
 
         fetch('/api/BodyMeasurements/add', requestOptions)
@@ -70,18 +71,22 @@ export const BodyMeasurementSection: React.FC = () =>
                 }
 
                 setFormData([createdRecord, ...formData]);
-            });
+            })
+            .then(() => setLoaderIsVisible(false));
     }
 
     function deleteRecord(valueDate : Date)
     {
+        setLoaderIsVisible(true);
         let formatedValueDate = date.format(valueDate, "YYYY-MM-DD");
         fetch(`/api/BodyMeasurements/delete?valuedate=${formatedValueDate}`, {method: "DELETE"})
-            .then(data => setFormData(current => current.filter(x => x.valueDate !== valueDate)));
+            .then(data => setFormData(current => current.filter(x => x.valueDate !== valueDate)))
+            .then(() => setLoaderIsVisible(false));
     }
 
     function editRecord(newRecord : BodyMeasurementRecord)
     {
+        setLoaderIsVisible(true);
         const requestOptions = getPostRequestOptions(newRecord);
         
         function handleResponse(response : Response)
@@ -130,7 +135,7 @@ export const BodyMeasurementSection: React.FC = () =>
                 data={formData}
                 handleEditClick={handleEditClick} 
                 handleRecordDeletion={deleteRecord}/>
-            <Loader isShown={loaderIsVisible}/>
+            <Loader isShown={false}/>
         </React.Fragment>
     );
 }
