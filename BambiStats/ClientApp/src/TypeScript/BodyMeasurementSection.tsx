@@ -135,7 +135,7 @@ export const BodyMeasurementSection: React.FC = () =>
                 data={formData}
                 handleEditClick={handleEditClick} 
                 handleRecordDeletion={deleteRecord}/>
-            <Loader isShown={false}/>
+            <Loader isShown={loaderIsVisible}/>
         </React.Fragment>
     );
 }
