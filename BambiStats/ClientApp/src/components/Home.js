@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {BirthdayNotification} from '../BirthdayNotification';
+import { BodyMeasurementSection } from '../TypeScript/BodyMeasurement/BodyMeasurementSection';
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -6,7 +8,8 @@ export class Home extends Component {
   render () {
     return (
       <div>
-       
+        <BirthdayNotification/>
+        <BodyMeasurementSection/>
       </div>
     );
   }
