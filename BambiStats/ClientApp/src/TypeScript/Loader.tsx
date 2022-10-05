@@ -9,7 +9,7 @@ export const Loader: React.FC<Props> = (props: Props) => {
     let loaderStyle : React.CSSProperties = {
         height: "100px",
         width: "100px",
-        position: "absolute",
+        position: "fixed",
         left: "50%",
         marginLeft: "-50px",
         top: "50%",

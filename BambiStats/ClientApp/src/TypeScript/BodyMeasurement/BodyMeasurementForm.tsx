@@ -80,7 +80,10 @@ export const BodyMeasurementForm: React.FC<Props> = (props: Props) => {
             <form className="relative  py-2 px-4 my-3 border-2 border-solid rounded flex flex-wrap" style={props.isUnderEdition ? { zIndex: 1000 } : {}} onSubmit={onFormSubmit}>
                 <div className="flex flex-col lg:flex-row m-auto space-y-1  lg:space-y-0 lg:space-x-5">
                     <div>
-                        <label htmlFor="measurementDate" className="hidden lg:inline-block lg:pr-2 font-semibold">Data:</label>
+                        <label
+                            htmlFor="measurementDate" 
+                            className="hidden lg:inline-block lg:pr-2 font-semibold"
+                            style={props.isUnderEdition ? { backgroundColor: "#f2f2f2" } : {}}>Data:</label>
                         <input
                             type="date"
                             id="measurementDate"
