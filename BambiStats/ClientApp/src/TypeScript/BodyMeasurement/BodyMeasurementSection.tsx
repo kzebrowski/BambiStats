@@ -115,9 +115,9 @@ export const BodyMeasurementSection: React.FC = () =>
 
     let sortedFormData: BodyMeasurementRecord[] = [];
     sortedFormData = sortedFormData.concat(formData).sort(function (a, b) {
-        if (a.valueDate < b.valueDate)
-            return -1;
         if (a.valueDate > b.valueDate)
+            return -1;
+        if (a.valueDate < b.valueDate)
             return 1;
         return 0;
     });
@@ -132,7 +132,7 @@ export const BodyMeasurementSection: React.FC = () =>
                 setIsUnderEdition={setIsUnderEdition}
                 submitRecordEdition={editRecord} />
             <BodyMeasurementTable 
-                data={formData}
+                data={sortedFormData}
                 handleEditClick={handleEditClick} 
                 handleRecordDeletion={deleteRecord}/>
             <Loader isShown={loaderIsVisible}/>
