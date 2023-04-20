@@ -5,6 +5,7 @@ import { Home } from './components/Home';
 
 import './custom.css'
 import { WishlistSection } from './TypeScript/Wishlist/WishlistSection';
+import { DogFoodReviewList } from './TypeScript/DogFoodReviews/DogFoodReviewList';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -14,6 +15,7 @@ export default class App extends Component {
       <Layout>
         <Route exact path='/' component={Home} />
         <Route exact path='/wishlist' component={WishlistSection} />
+        <Route exact path='/foodreviews' component={DogFoodReviewList} />
       </Layout>
     );
   }

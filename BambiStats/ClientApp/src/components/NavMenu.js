@@ -41,6 +41,9 @@ export class NavMenu extends Component {
                     <NavLink tag={Link} to='/wishlist' className="pointer text-xl lg:text-lg text-center">Rzeczy do kupienia</NavLink>
                   </NavItem>
                   <NavItem>
+                    <NavLink tag={Link} to='/foodreviews' className="pointer text-xl lg:text-lg text-center">Recenzje karmy</NavLink>
+                  </NavItem>
+                  <NavItem>
                     <NavLink className="pointer text-xl lg:text-lg text-center">Kalkulator karmy</NavLink>
                   </NavItem>
                 </Nav>
