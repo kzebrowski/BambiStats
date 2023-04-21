@@ -132,8 +132,7 @@ export const BodyMeasurementForm: React.FC<Props> = (props: Props) => {
                             min="0" />
                     </div>
                     <div
-                        className="inline-flex pr-2 lg:w-32 font-semibold border-2 border-solid rounded backgroud hover:pointer"
-                        style={{ backgroundColor: "#FCC5C0" }}>
+                        className="inline-flex pr-2 lg:w-32 font-semibold border-2 border-solid rounded backgroud hover:pointer bg-pink" >
                         <input type="submit" className="m-auto text-white w-full h-full" value={props.isUnderEdition ? "Zapisz" : "Dodaj"} />
                     </div>
                     {props.isUnderEdition &&

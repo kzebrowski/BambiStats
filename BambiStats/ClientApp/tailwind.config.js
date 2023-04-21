@@ -8,6 +8,11 @@ module.exports = {
       lg: '992px',
       xl: '1440px'
     },
+    colors: {
+      'pink': '#FCC5C0',
+      'brown': '#A64B2A',
+      'lightgrey': '#D8D8D8'
+    },
     extend: {}
   },
   plugins: [],
