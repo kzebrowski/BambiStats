@@ -77,7 +77,7 @@ export const BodyMeasurementForm: React.FC<Props> = (props: Props) => {
     return (
         <>
             {props.isUnderEdition && <div className="loading-fog" />}
-            <form className="relative  py-2 px-4 my-3 border-2 border-solid rounded flex flex-wrap" style={props.isUnderEdition ? { zIndex: 1000 } : {}} onSubmit={onFormSubmit}>
+            <form className="relative  py-2 px-4 my-3 border-2 border-solid border-lightgrey rounded flex flex-wrap" style={props.isUnderEdition ? { zIndex: 1000 } : {}} onSubmit={onFormSubmit}>
                 <div className="flex flex-col lg:flex-row m-auto space-y-1  lg:space-y-0 lg:space-x-5">
                     <div>
                         <label
@@ -88,7 +88,7 @@ export const BodyMeasurementForm: React.FC<Props> = (props: Props) => {
                             type="date"
                             id="measurementDate"
                             readOnly={props.isUnderEdition}
-                            className="border-2 rounded pl-2 w-full lg:w-36"
+                            className="border-2 border-lightgrey rounded pl-2 w-full lg:w-36"
                             placeholder="Data"
                             value={valueDate.toISOString().substring(0, 10)}
                             onChange={handleValueDateChange} />
@@ -98,7 +98,7 @@ export const BodyMeasurementForm: React.FC<Props> = (props: Props) => {
                         <input
                             type="number"
                             id="weight"
-                            className="border-2 rounded pl-2 lg:w-36"
+                            className="border-2 border-lightgrey rounded pl-2 lg:w-36"
                             placeholder="Waga(kg)"
                             onFocus={(e) => e.target.select()}
                             value={weight || ''}
@@ -111,7 +111,7 @@ export const BodyMeasurementForm: React.FC<Props> = (props: Props) => {
                         <input
                             type="number"
                             id="numberOfPoops"
-                            className="border-2 rounded pl-2 lg:w-36"
+                            className="border-2 border-lightgrey rounded pl-2 lg:w-36"
                             placeholder="Ilość kup"
                             onFocus={(e) => e.target.select()}
                             value={numberOfPoops || ''}
@@ -123,7 +123,7 @@ export const BodyMeasurementForm: React.FC<Props> = (props: Props) => {
                         <input
                             type="number"
                             id="sleepTime"
-                            className="border-2 rounded pl-2 lg:w-36"
+                            className="border-2 border-lightgrey rounded pl-2 lg:w-36"
                             placeholder="Czas snu (godz.)"
                             onFocus={(e) => e.target.select()}
                             value={sleepLength || ''}
@@ -132,11 +132,11 @@ export const BodyMeasurementForm: React.FC<Props> = (props: Props) => {
                             min="0" />
                     </div>
                     <div
-                        className="inline-flex pr-2 lg:w-32 font-semibold border-2 border-solid rounded backgroud hover:pointer bg-pink" >
+                        className="inline-flex pr-2 lg:w-32 font-semibold border-2 border-solid border-lightgrey rounded backgroud hover:pointer bg-pink" >
                         <input type="submit" className="m-auto text-white w-full h-full" value={props.isUnderEdition ? "Zapisz" : "Dodaj"} />
                     </div>
                     {props.isUnderEdition &&
-                        <div className="inline-flex pr-2 lg:w-32 font-semibold border-2 border-solid rounded backgroud hover:pointer">
+                        <div className="inline-flex pr-2 lg:w-32 font-semibold border-2 border-solid border-lightgrey rounded backgroud hover:pointer">
                             <button className="m-auto w-full h-full" onClick={cancelEdition}>Anuluj edycję</button>
                         </div>}
                 </div>
