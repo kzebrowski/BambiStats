@@ -71,7 +71,7 @@ export function NavMenu(props)
                           <div id='signInDiv' className='flex justify-center'></div>
                       </DropdownItem>
                       <DropdownItem hidden={!userEmail} disabled={true} className='text-center' >
-                         <span className='text-[#ffffff] md:brightness-100 md:text-lightgrey'>Siema {userEmail}</span>
+                         <span className='text-[#ffffff] md:brightness-100 md:text-lightgrey'>Serwus {userEmail}</span>
                       </DropdownItem>
                       <DropdownItem hidden={!userEmail} onClick={handleLogOut} className='text-center' >
                          <span className='text-[#ffffff] md:text-[#000000]'>Wyloguj się</span>

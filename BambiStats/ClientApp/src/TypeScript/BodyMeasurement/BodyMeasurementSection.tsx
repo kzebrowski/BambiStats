@@ -51,6 +51,12 @@ export const BodyMeasurementSection: React.FC = () =>
 
     function addRecord(newItem : BodyMeasurementRecord)
     {
+        if (!localStorage.getItem("userEmail"))
+        {
+            alert("Aby dodać wpis, musisz się zalogować.");
+            return;
+        }
+
         setLoaderIsVisible(true);
         const requestOptions = getPostRequestOptions(newItem);
 
