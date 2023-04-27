@@ -36,8 +36,15 @@ export const BodyMeasurementTable : React.FC<BodyMeasurementProps> = (props: Bod
 
     function deleteRecord(valueDate: Date | undefined)
     {
+        if (!localStorage.getItem("userEmail"))
+        {
+            alert("Aby usunąć wpis, musisz się zalogować.");
+            return;
+        }
+
         if (valueDate === undefined)
             return;
+            
         setConfirmationModalData({isOpen: false, valueDate: undefined})
         props.handleRecordDeletion(valueDate);
     }

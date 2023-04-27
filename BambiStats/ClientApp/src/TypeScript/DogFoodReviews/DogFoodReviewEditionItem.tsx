@@ -22,6 +22,12 @@ export const DogFoodReviewEditionItem : React.FC<Props> = (props: Props) =>
 
     function submitReview() 
     {
+        if (!localStorage.getItem("userEmail"))
+        {
+            alert("Aby dodać recenzję, musisz się zalogować.");
+            return;
+        }
+
         if (name === '' || description === '' || rating === 0)
             return;
 

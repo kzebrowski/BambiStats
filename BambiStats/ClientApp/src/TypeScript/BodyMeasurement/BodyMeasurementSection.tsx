@@ -86,6 +86,12 @@ export const BodyMeasurementSection: React.FC = () =>
 
     function editRecord(newRecord : BodyMeasurementRecord)
     {
+        if (!localStorage.getItem("userEmail"))
+        {
+            alert("Aby edytować wpis, musisz się zalogować.");
+            return;
+        }
+
         setLoaderIsVisible(true);
         const requestOptions = getPostRequestOptions(newRecord);
         
