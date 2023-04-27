@@ -10,6 +10,7 @@ module.exports = {
     },
     colors: {
       'pink': '#FCC5C0',
+      'violet': "#C689C6",
       'brown': '#A64B2A',
       'lightgrey': '#D8D8D8'
     },

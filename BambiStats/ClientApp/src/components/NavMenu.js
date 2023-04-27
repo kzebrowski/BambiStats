@@ -66,15 +66,15 @@ export function NavMenu(props)
                     <DropdownToggle nav className="pointer">
                       <img src={AlienIcon} alt="???" className='brightness-95 pointer' style={{ width: "30px", height: "auto", margin: "0 auto" }} />
                     </DropdownToggle>
-                    <DropdownMenu end={true}>
-                    <DropdownItem hidden={userEmail}>
-                        <div id='signInDiv'></div>
+                    <DropdownMenu end={true} className={collapsed ? 'bg-violet brightness-95 text-white' : 'bg-white'}>
+                      <DropdownItem hidden={userEmail}>
+                          <div id='signInDiv' className='flex justify-center'></div>
                       </DropdownItem>
-                      <DropdownItem hidden={!userEmail} disabled={true}>
-                         Siema {userEmail}
+                      <DropdownItem hidden={!userEmail} disabled={true} className='text-center' >
+                         <span className='text-[#ffffff] md:brightness-100 md:text-lightgrey'>Siema {userEmail}</span>
                       </DropdownItem>
-                      <DropdownItem hidden={!userEmail} onClick={handleLogOut}>
-                         Wyloguj się
+                      <DropdownItem hidden={!userEmail} onClick={handleLogOut} className='text-center' >
+                         <span className='sm:text-[#ffffff] md:text-[#000000]'>Wyloguj się</span>
                       </DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>
