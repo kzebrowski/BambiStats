@@ -5,6 +5,7 @@ import { ConfirmationModal } from "../ConfirmationModal";
 
 export const DogFoodReviewList : React.FC = () =>
 {
+    // Dummy data to be removed when the final vesion is developed
     let lorem = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus soluta qui earum pariatur harum facilis nobis cum quibusdam illum, eligendi repellendus odio minus optio voluptatibus, eos quo, omnis quasi enim.";
     let dummyData : DogFoodReviewItemData[] = [{name: "Nazwa Karmy", rating: 4, description: lorem}, {name: "Nazwa Karmy", rating: 4, description: lorem}, {name: "Nazwa Karmy", rating: 4, description: lorem}, {name: "Nazwa Karmy", rating: 4, description: lorem}, {name: "Nazwa Karmy", rating: 4, description: lorem}]
 

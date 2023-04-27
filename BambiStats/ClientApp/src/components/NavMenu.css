@@ -20,3 +20,8 @@ html {
 .bg-light {
   background-color: #C689C6 !important;
 }
+
+.dropdown-menu-end {
+  right: 0;
+  left: auto;
+}

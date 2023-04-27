@@ -26,5 +26,7 @@
   "include": [
     "./src/TypeScript"
   ],
-  "exclude": []
+  "exclude": [
+    "./src/**/*.js"
+  ]
 }
